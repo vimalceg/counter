@@ -6,17 +6,23 @@ class Counter extends React.Component{
     private controller:IController
     constructor(props){
         super(props);
-        this.state={}
-        let {controller}=DependenciesFactory({setState:this.setState})
+        
+        let {controller}=DependenciesFactory({setState:(state:any)=>{
+            if(this.state===undefined){
+                this.state=state;
+            }else{
+            this.setState(state);
+            }
+        }})
         this.controller=controller;
-        this.controller.initialize(props.count);
+        this.controller.initialize({count:props.count});
     } 
     render(){ 
-        let {count}=this.props;
-        return <div>test
+        let {count}=this.state;
+        return <div>
         <button>-</button>
         {count} 
-        <button>+</button>
+        <button onClick={this.controller.handleIncrement}>+</button>
         </div>
     }
 }

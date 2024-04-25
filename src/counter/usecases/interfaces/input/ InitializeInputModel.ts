@@ -1,2 +1,2 @@
 type InitializeInputModel=number;
-export default IncrementInputModel;
+export default InitializeInputModel;
